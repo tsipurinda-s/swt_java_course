@@ -24,4 +24,17 @@ public class ContactHelper extends HelperBase {
         wd.findElement(By.linkText("home page")).click();
     }
 
+    public void initContactModification() {
+        click(By.cssSelector("img[alt='Edit']"));
+    }
+
+    public void submitContactModification() {
+        click(By.name("update"));
+    }
+
+    public void deleteSelectedContacts() {
+        click(By.name("selected[]"));
+        click(By.cssSelector("input[value=Delete]"));
+        wd.switchTo().alert().accept();
+    }
 }
