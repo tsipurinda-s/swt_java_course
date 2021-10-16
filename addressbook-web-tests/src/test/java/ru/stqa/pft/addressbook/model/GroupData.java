@@ -1,7 +1,5 @@
 package ru.stqa.pft.addressbook.model;
 
-import org.testng.annotations.BeforeMethod;
-
 public class GroupData {
     private int id;
     private final String name;
