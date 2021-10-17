@@ -8,10 +8,10 @@ import java.util.List;
 
 public class ContactCreationTests extends TestBase{
 
-  @Test
+  @Test(enabled = false)
   public void testContactCreation() {
     List<ContactData> before = app.getContactHelper().getContactList();
-    app.getNavigationHelper().goToContactPage();
+    app.goTo().goToContactPage();
     ContactData contact = new ContactData("Иван", "Иванов", null, null,null);
     app.getContactHelper().createContact(contact, true);
     List<ContactData> after = app.getContactHelper().getContactList();

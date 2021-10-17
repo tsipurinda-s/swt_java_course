@@ -8,10 +8,10 @@ import java.util.Comparator;
 import java.util.List;
 
 public class ContactModificationTests extends TestBase {
-    @Test
+    @Test(enabled = false)
     public void testContactModification(){
         if (! app.getContactHelper().isThereAContact()) {
-            app.getNavigationHelper().goToContactPage();
+            app.goTo().goToContactPage();
             app.getContactHelper().createContact(new ContactData("Иван", "Петров", "81234567890", "petrov.i@mail.com", "test1"), true);
         }
         List<ContactData> before = app.getContactHelper().getContactList();
