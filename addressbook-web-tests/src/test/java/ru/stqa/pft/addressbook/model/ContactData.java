@@ -4,7 +4,9 @@ public class ContactData {
     private int id = Integer.MAX_VALUE;
     private String firstname;
     private String lastname;
-    private String mobile;
+    private String homePhone;
+    private String mobilePhone;
+    private String workPhone;
     private String email;
     private String group;
 
@@ -17,13 +19,19 @@ public class ContactData {
         return firstname;
     }
 
-
     public String getLastname() {
         return lastname;
     }
 
-    public String getMobile() {
-        return mobile;
+    public String getHomePhone() {
+        return homePhone;
+    }
+    public String getMobilePhone() {
+        return mobilePhone;
+    }
+
+    public String getWorkPhone() {
+        return workPhone;
     }
 
     public String getEmail() {
@@ -49,8 +57,18 @@ public class ContactData {
         return this;
     }
 
-    public ContactData withMobile(String mobile) {
-        this.mobile = mobile;
+    public ContactData withHomePhone(String home) {
+        this.homePhone = home;
+        return this;
+    }
+
+    public ContactData withMobilePhone(String mobile) {
+        this.mobilePhone = mobile;
+        return this;
+    }
+
+    public ContactData withWorkPhone(String work) {
+        this.workPhone = work;
         return this;
     }
 
@@ -70,12 +88,13 @@ public class ContactData {
                 "id=" + id +
                 ", firstname='" + firstname + '\'' +
                 ", lastname='" + lastname + '\'' +
-                ", mobile='" + mobile + '\'' +
+                ", home='" + homePhone + '\'' +
+                ", mobile='" + mobilePhone + '\'' +
+                ", work='" + workPhone + '\'' +
                 ", email='" + email + '\'' +
                 ", group='" + group + '\'' +
                 '}';
     }
-
 
     @Override
     public boolean equals(Object o) {
