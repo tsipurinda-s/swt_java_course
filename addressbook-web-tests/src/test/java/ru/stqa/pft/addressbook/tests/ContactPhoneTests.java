@@ -5,6 +5,9 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
 
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
 public class ContactPhoneTests extends TestBase{
 
     @BeforeMethod
@@ -21,12 +24,17 @@ public class ContactPhoneTests extends TestBase{
     public void testContactPhones() {
         ContactData contact = app.contact().all().iterator().next();
         ContactData contactInfoFromEditForm = app.contact().getContactInfoFromEditForm(contact);
-        Assert.assertEquals(contact.getHomePhone(), cleaned(contactInfoFromEditForm.getHomePhone()));
-        Assert.assertEquals(contact.getMobilePhone(), cleaned(contactInfoFromEditForm.getMobilePhone()));
-        Assert.assertEquals(contact.getWorkPhone(), cleaned(contactInfoFromEditForm.getWorkPhone()));
+        Assert.assertEquals(contact.getAllPhones(), mergePhones(contactInfoFromEditForm));
     }
 
-    public String cleaned(String phone) {
+    private String mergePhones(ContactData contact) {
+        return Arrays.asList(contact.getHomePhone(), contact.getMobilePhone(), contact.getWorkPhone())
+                .stream().filter((s -> ! s.equals("")))
+                .map(ContactPhoneTests::cleaned)
+                .collect(Collectors.joining("\n"));
+    }
+
+    public static String cleaned(String phone) {
         return phone.replaceAll("\\s","").replaceAll("[-()]","");
     }
 
