@@ -24,6 +24,11 @@ public class HelperBase {
         }
     }
 
+    protected void choose(By locator, String text) {
+        click(locator);
+        wd.findElement(locator).sendKeys(text);
+    }
+
     protected void attach(By locator, File file) {
         if (file != null) {
                 wd.findElement(locator).sendKeys(file.getAbsolutePath());

@@ -28,7 +28,8 @@ public class ContactData {
     private String allEmails;
     @Expose
     private String group;
-    private File photo;
+    @Expose
+    private String photoPath;
 
     public int getId() {
         return id;
@@ -79,6 +80,7 @@ public class ContactData {
     }
 
     public File getPhoto() {
+        File photo = new File(photoPath);
         return photo;
     }
 
@@ -142,8 +144,8 @@ public class ContactData {
         return this;
     }
 
-    public ContactData withPhoto(File photo) {
-        this.photo = photo;
+    public ContactData withPhoto(String photoPath) {
+        this.photoPath = photoPath;
         return this;
     }
 

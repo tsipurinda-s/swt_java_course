@@ -62,7 +62,7 @@ public class ContactDataGenerator {
                     .withFirstname(String.format("Firstname %s", i)).withLastname(String.format("Lastname %s", i))
                     .withHomePhone(String.format("8812123456%s", i)).withMobilePhone(String.format("8999123456%s", i)).withWorkPhone(String.format("8812123121%s", i))
                     .withEmail(String.format("qwerty.%s@gmail.com", i)).withEmail2(String.format("qwerty.%s@yandex.ru", i)).withEmail3(String.format("qwerty.%s@outlook.com", i))
-                    .withGroup(String.format("test1")));
+                    .withGroup(String.format("test1")).withPhoto(String.format("src/test/resources/ava.png")));
         }
         return contacts;
     }
