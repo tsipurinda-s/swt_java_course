@@ -12,7 +12,7 @@ public class ContactPhoneTests extends TestBase{
 
     @BeforeMethod
     public void ensurePreconditions() {
-        if (app.contact().all().size() == 0) {
+        if (app.db().contacts().size() == 0) {
             app.goTo().contactPage();
             app.contact().create(new ContactData()
                     .withFirstname("Иван").withLastname("Петров").withMobilePhone("81234567890").withEmail("petrov.i@mail.com").withGroup("test1")
