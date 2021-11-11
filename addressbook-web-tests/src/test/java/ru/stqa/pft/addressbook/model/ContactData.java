@@ -118,8 +118,12 @@ public class ContactData {
     }
 
     public File getPhoto() {
-        File photo = new File(photoPath);
-        return photo;
+        if (photoPath == null) {
+            return null;
+        } else {
+            File photo = new File(photoPath);
+            return photo;
+        }
     }
 
     public ContactData withId(int id) {
