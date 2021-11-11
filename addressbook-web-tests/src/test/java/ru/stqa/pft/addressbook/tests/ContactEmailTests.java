@@ -15,7 +15,7 @@ public class ContactEmailTests extends TestBase{
         if (app.db().contacts().size() == 0) {
             app.goTo().contactPage();
             app.contact().create(new ContactData()
-                    .withFirstname("Иван").withLastname("Петров").withMobilePhone("81234567890").withGroup("test1")
+                    .withFirstname("Иван").withLastname("Петров").withMobilePhone("81234567890")
                     .withEmail("123@yandex.ru").withEmail2("qwe.123@gmail.com").withEmail3("q-we_123@outlook.com"), true);
         }
     }

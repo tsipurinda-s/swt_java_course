@@ -8,7 +8,6 @@
     "email": "qwerty.0@gmail.com",
     "email2": "qwerty.0@yandex.ru",
     "email3": "qwerty.0@outlook.com",
-    "group": "test 1",
     "photoPath": "src/test/resources/ava.png"
   },
   {
@@ -20,7 +19,6 @@
     "email": "qwerty.1@gmail.com",
     "email2": "qwerty.1@yandex.ru",
     "email3": "qwerty.1@outlook.com",
-    "group": "test 1",
     "photoPath": "src/test/resources/ava.png"
   },
   {
@@ -32,7 +30,6 @@
     "email": "qwerty.2@gmail.com",
     "email2": "qwerty.2@yandex.ru",
     "email3": "qwerty.2@outlook.com",
-    "group": "test 1",
     "photoPath": "src/test/resources/ava.png"
   }
 ]
