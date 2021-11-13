@@ -7,6 +7,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
+import ru.stqa.pft.addressbook.model.GroupData;
 
 import java.util.List;
 
@@ -53,7 +54,7 @@ public class ContactHelper extends HelperBase {
         click(By.name("update"));
     }
 
-    private void selectContactById(int id) {
+    public void selectContactById(int id) {
         wd.findElement(By.cssSelector("input[value='" + id + "']")).click();
     }
 
@@ -117,5 +118,41 @@ public class ContactHelper extends HelperBase {
         return new ContactData().withId(contact.getId()).withFirstname(firstname).withLastname(lastname)
                 .withHomePhone(homePhone).withMobilePhone(mobilePhone).withWorkPhone(workPhone)
                 .withEmail(email).withEmail2(email2).withEmail3(email3);
+    }
+
+
+    public void addContactToGroup(ContactData before, GroupData groupForAdding) {
+        selectContactById(before.getId());
+        selectGroupForAdding(groupForAdding.getName());
+        submitAddingContactsToGroup();
+        returnToGroup(groupForAdding);
+    }
+
+    private void returnToGroup(GroupData groupForAdding) {
+        wd.findElement(By.linkText("group page \"" + groupForAdding.getName() + "\""));
+    }
+
+    private void submitAddingContactsToGroup() {
+        wd.findElement(By.name("add")).click();
+    }
+
+    private void selectGroupForAdding(String name) {
+        new Select(wd.findElement(By.name("to_group"))).selectByVisibleText(name);
+    }
+
+
+    public void removeFromGroup(ContactData contact, GroupData groupForRemove) {
+        selectGroupForRemove(groupForRemove.getName());
+        selectContactById(contact.getId());
+        submitRemovalContactsToGroup();
+        returnToGroup(groupForRemove);
+    }
+
+    private void submitRemovalContactsToGroup() {
+        wd.findElement(By.name("remove")).click();
+    }
+
+    private void selectGroupForRemove(String name) {
+        new Select(wd.findElement(By.name("group"))).selectByVisibleText(name);
     }
 }

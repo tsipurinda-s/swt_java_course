@@ -229,4 +229,5 @@ public class ContactData {
         groups.add(group);
         return this;
     }
+
 }

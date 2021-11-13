@@ -17,4 +17,11 @@ public class NavigationHelper extends HelperBase{
         click(By.linkText("add new"));
     }
 
+    public void homePage() {
+        click(By.cssSelector("#logo"));
+    }
+
+
+
+
 }
