@@ -15,7 +15,7 @@ import static org.testng.AssertJUnit.assertTrue;
 
 public class RegistrationTests extends TestBase {
 
-    @BeforeMethod
+    //@BeforeMethod
     public void startMailServer() {
         app.mail().start();
     }
