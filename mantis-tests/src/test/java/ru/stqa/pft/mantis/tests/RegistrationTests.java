@@ -25,15 +25,13 @@ public class RegistrationTests extends TestBase {
         long now = System.currentTimeMillis();
         String user = String.format("user%s", now);
         String password = "password";
-        String email = String.format("user%s@localhost.localdomain", now);
-        app.james().createUser(user, password);
+        String email = String.format("user%s@localhost", now);
+        app.james().createUser(user, password); //для внешнего почтового сервера(JamesHelper)
         app.registration().start(user, email);
 
-        //для встроенного почтового сервера(MailHelper)
-        //List<MailMessage> mailMessages = app.mail().waitForMail(2, 10000);
+        //List<MailMessage> mailMessages = app.mail().waitForMail(2, 10000); //для встроенного почтового сервера(MailHelper)
 
-        //для внешнего почтового сервера(JamesHelper)
-        List<MailMessage> mailMessages = app.james().waitForMail(user,password,60000);
+        List<MailMessage> mailMessages = app.james().waitForMail(user,password,60000); //для внешнего почтового сервера(JamesHelper)
 
         String confirmationLink = findConfirmationLink(mailMessages, email);
         app.registration().finish(confirmationLink, password);
