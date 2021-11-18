@@ -52,7 +52,7 @@ public class JamesHelper {
         closeTelnetSession();
     }
 
-    private void initTelnetSession() {
+    public void initTelnetSession() {
         mailServer = app.getProperty("mailserver.host");
         int port = Integer.parseInt(app.getProperty("mailserver.port"));
         String login = app.getProperty("mailserver.adminlogin");
@@ -115,7 +115,7 @@ public class JamesHelper {
         }
     }
 
-    private void closeTelnetSession() {
+    public void closeTelnetSession() {
         write("quit");
     }
 
@@ -141,6 +141,7 @@ public class JamesHelper {
     }
 
     public List<MailMessage> waitForMail(String username, String password, long timeout) throws MessagingException {
+
         long now = System.currentTimeMillis();
         while (System.currentTimeMillis() < now + timeout) {
             List<MailMessage> allMail = getAllMail(username, password);

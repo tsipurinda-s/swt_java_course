@@ -16,10 +16,15 @@ public class ApplicationManager {
     private WebDriver wd;
 
     private String browser;
-    private RegistrationHelper registrationHelper;
     private FtpHelper ftp;
     private MailHelper mailHelper;
     private JamesHelper jamesHelper;
+    private RegistrationHelper registrationHelper;
+    private AuthorizationHelper authorizationHelper;
+    private NavigationHelper navigationHelper;
+    private UserHelper userHelper;
+    private DbHelper dbHelper;
+    private SetPasswordHelper setPasswordHelper;
 
     public ApplicationManager(String browser) {
         this.browser = browser;
@@ -43,13 +48,6 @@ public class ApplicationManager {
 
     public String getProperty(String key) {
         return properties.getProperty(key);
-    }
-
-    public RegistrationHelper registration() {
-        if (registrationHelper == null) {
-            registrationHelper = new RegistrationHelper(this);
-        }
-        return registrationHelper;
     }
 
     public FtpHelper ftp() {
@@ -84,5 +82,47 @@ public class ApplicationManager {
             jamesHelper = new JamesHelper(this);
         }
         return jamesHelper;
+    }
+
+    public DbHelper db() {
+        if (dbHelper == null) {
+            dbHelper = new DbHelper(this);
+        }
+        return dbHelper;
+    }
+
+    public RegistrationHelper registration() {
+        if (registrationHelper == null) {
+            registrationHelper = new RegistrationHelper(this);
+        }
+        return registrationHelper;
+    }
+
+    public AuthorizationHelper authorization() {
+        if (authorizationHelper == null) {
+            authorizationHelper = new AuthorizationHelper(this);
+        }
+        return authorizationHelper;
+    }
+
+    public UserHelper user() {
+        if (userHelper == null) {
+            userHelper = new UserHelper(this);
+        }
+        return userHelper;
+    }
+
+    public NavigationHelper goTo() {
+        if (navigationHelper == null) {
+            navigationHelper = new NavigationHelper(this);
+        }
+        return navigationHelper;
+    }
+
+    public SetPasswordHelper setPassword() {
+        if (setPasswordHelper == null) {
+            setPasswordHelper = new SetPasswordHelper(this);
+        }
+        return setPasswordHelper;
     }
 }
