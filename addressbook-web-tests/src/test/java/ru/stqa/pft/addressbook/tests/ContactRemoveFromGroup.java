@@ -5,8 +5,7 @@ import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.GroupData;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.equalTo;
+import java.util.NoSuchElementException;
 
 public class ContactRemoveFromGroup extends TestBase{
 
@@ -27,24 +26,28 @@ public class ContactRemoveFromGroup extends TestBase{
         }
     }
 
-    public ContactData prepareContactForRemoveFromGroup(ContactData contact) {
-
-        if (contact.getGroups().size() == 0) {
-            app.contact().addContactToGroup(contact, app.db().groups().iterator().next());
-            app.goTo().homePage();
-        }
-        return contact;
-    }
-
     @Test
     public void testRemoveContactFromGroup() {
-        ContactData contact = app.db().contacts().iterator().next();
-        prepareContactForRemoveFromGroup(contact);
-        ContactData before = app.db().contacts().iterator().next();
-        GroupData groupForRemove = before.getGroups().iterator().next();
-        app.contact().removeFromGroup(contact, groupForRemove);
-        ContactData after = app.db().contacts().iterator().next();
+        ContactData before;
 
-        assertThat(before.getGroups(), equalTo(after.inGroup(groupForRemove).getGroups()));
+        try {
+            before = app.db().contacts().stream().filter((c) -> c.getGroups().size() != 0).findFirst().get();
+        } catch (NoSuchElementException e) {
+            before = app.db().contacts().iterator().next();
+            prepareContactForRemoveFromGroup(before);
+        }
+
+        GroupData groupForRemove = before.getGroups().iterator().next();
+        app.contact().removeFromGroup(before, groupForRemove);
+        ContactData finalBefore = before;
+        ContactData after = app.db().contacts().stream().filter((c) -> c.getId() == finalBefore.getId()).findFirst().get();
+
+        assert(!after.getGroups().contains(groupForRemove));
+    }
+
+    public ContactData prepareContactForRemoveFromGroup(ContactData contact) {
+        app.contact().addContactToGroup(contact, app.db().groups().iterator().next());
+        app.goTo().homePage();
+        return contact;
     }
 }

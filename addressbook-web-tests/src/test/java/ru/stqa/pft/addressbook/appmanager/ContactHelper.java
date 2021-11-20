@@ -129,7 +129,7 @@ public class ContactHelper extends HelperBase {
     }
 
     private void returnToGroup(GroupData groupForAdding) {
-        wd.findElement(By.linkText("group page \"" + groupForAdding.getName() + "\""));
+        wd.findElement(By.linkText("group page \"" + groupForAdding.getName() + "\"")).click();
     }
 
     private void submitAddingContactsToGroup() {
