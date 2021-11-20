@@ -157,6 +157,24 @@ public class JamesHelper {
         throw new Error("No mail :(");
     }
 
+    public List<MailMessage> waitForMail(String username, String password, List<MailMessage> MailBefore, long timeout) throws MessagingException {
+
+        long now = System.currentTimeMillis();
+        while (System.currentTimeMillis() < now + timeout) {
+            List<MailMessage> allMail = getAllMail(username, password);
+            if (allMail.size() > MailBefore.size()) {
+                allMail.removeAll(MailBefore);
+                return allMail;
+            }
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        throw new Error("No new mail :(");
+    }
+
     public List<MailMessage> getAllMail(String username, String password) throws MessagingException {
         Folder inbox = openInbox(username, password);
         List<MailMessage> messages = Arrays.asList(inbox.getMessages()).stream().map((m) -> toModelMail(m)).collect(Collectors.toList());
