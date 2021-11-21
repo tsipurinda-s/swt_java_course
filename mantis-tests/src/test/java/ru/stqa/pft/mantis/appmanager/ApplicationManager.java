@@ -25,6 +25,7 @@ public class ApplicationManager {
     private UserHelper userHelper;
     private DbHelper dbHelper;
     private SetPasswordHelper setPasswordHelper;
+    private SoapHelper soapHelper;
 
     public ApplicationManager(String browser) {
         this.browser = browser;
@@ -124,5 +125,12 @@ public class ApplicationManager {
             setPasswordHelper = new SetPasswordHelper(this);
         }
         return setPasswordHelper;
+    }
+
+    public SoapHelper soap() {
+        if (soapHelper == null) {
+            soapHelper = new SoapHelper(this);
+        }
+        return soapHelper;
     }
 }
