@@ -123,7 +123,7 @@ public class ContactHelper extends HelperBase {
 
     public void addContactToGroup(ContactData before, GroupData groupForAdding) {
         selectContactById(before.getId());
-        selectGroupForAdding(groupForAdding.getName());
+        selectGroupForAdding(groupForAdding.getId());
         submitAddingContactsToGroup();
         returnToGroup(groupForAdding);
     }
@@ -136,13 +136,13 @@ public class ContactHelper extends HelperBase {
         wd.findElement(By.name("add")).click();
     }
 
-    private void selectGroupForAdding(String name) {
-        new Select(wd.findElement(By.name("to_group"))).selectByVisibleText(name);
+    private void selectGroupForAdding(int id) {
+        new Select(wd.findElement(By.name("to_group"))).selectByValue(String.valueOf(id));
     }
 
 
     public void removeFromGroup(ContactData contact, GroupData groupForRemove) {
-        selectGroupForRemove(groupForRemove.getName());
+        selectGroupForRemove(groupForRemove.getId());
         selectContactById(contact.getId());
         submitRemovalContactsToGroup();
         returnToGroup(groupForRemove);
@@ -152,7 +152,7 @@ public class ContactHelper extends HelperBase {
         wd.findElement(By.name("remove")).click();
     }
 
-    private void selectGroupForRemove(String name) {
-        new Select(wd.findElement(By.name("group"))).selectByVisibleText(name);
+    private void selectGroupForRemove(int id) {
+        new Select(wd.findElement(By.name("group"))).selectByValue(String.valueOf(id));
     }
 }
