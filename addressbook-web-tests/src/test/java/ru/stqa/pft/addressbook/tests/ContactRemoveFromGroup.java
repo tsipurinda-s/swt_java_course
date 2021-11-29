@@ -33,8 +33,7 @@ public class ContactRemoveFromGroup extends TestBase{
         try {
             before = app.db().contacts().stream().filter((c) -> c.getGroups().size() != 0).findFirst().get();
         } catch (NoSuchElementException e) {
-            before = app.db().contacts().iterator().next();
-            prepareContactForRemoveFromGroup(before);
+            before = prepareContactForRemoveFromGroup(app.db().contacts().iterator().next());
         }
 
         GroupData groupForRemove = before.getGroups().iterator().next();
@@ -48,6 +47,6 @@ public class ContactRemoveFromGroup extends TestBase{
     public ContactData prepareContactForRemoveFromGroup(ContactData contact) {
         app.contact().addContactToGroup(contact, app.db().groups().iterator().next());
         app.goTo().homePage();
-        return contact;
+        return app.db().contacts().stream().filter((c) -> c.getId() == contact.getId()).findFirst().get();
     }
 }
